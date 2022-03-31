@@ -51,7 +51,7 @@ app.post('/added', function(sReq, sRes) {
 async function main() {
 
 
-    const uri = "mongodb+srv://rafal:rafal@cluster0.gsf4h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    const uri = "mongodb+srv://rafal:rafal@cluster0.gsf4h.mongodb.net/cattu?retryWrites=true&w=majority";
 
 
     const client = new MongoClient(uri);
