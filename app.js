@@ -26,7 +26,9 @@ app.use(express.static("public"));
 
 app.use(express.json({ extended: false })); //This is the line that you want to add
 
-app.use(bodyParser({ extended: false }))
+//app.use(bodyParser({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', engine({
     defaultLayout: 'main'
 }))
@@ -44,8 +46,7 @@ app.post('/added', function(sReq, sRes) {
 });
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 async function main() {
 
