@@ -26,34 +26,6 @@ app.engine('handlebars', engine({
 }))
 app.set('view engine', 'handlebars')
 
-async function readingFromForm() {
-    console.log('data download has started');
-    console.log('3');
-    app.post('/added', function(sReq, sRes) {
-        var newTitle = sReq.body.title;
-        console.log('title:', newTitle);
-
-        var newAuthor = sReq.body.author;
-        console.log('author:', newAuthor);
-
-        var newMood = sReq.body.mood;
-        console.log('mood:', newMood);
-
-        var newTime = sReq.body.time;
-        console.log('time:', newTime);
-
-        var newDate = sReq.body.date;
-        console.log('date:', newDate);
-
-        sRes.sendStatus(200);
-
-        console.log(sReq); //Caution! It generates a lot of "spam" in the console !!!
-        console.log(sRes); //Caution! It generates a lot of "spam" in the console !!!
-
-    });
-    console.log('4');
-    console.log('data has been downloaded');
-}
 
 async function main() {
 
@@ -63,27 +35,48 @@ async function main() {
 
     try {
         console.log('START');
-        console.log('1');
+
         await client.connect(); // Connect to the MongoDB cluster
 
-        console.log('2');
-        await readingFromForm();
 
-        console.log('5');
-        await createListing(client, {
-            title: "newTitle",
-            author: "newAuthor",
-            mood: "newMood",
-            time: "newTime",
-            date: "newDate" // YYYY-MM-DD
-        })
-        console.log('END');
+
+        app.post('/added', async function(sReq, sRes) {
+            var newTitle = sReq.body.title;
+            console.log('title:', newTitle);
+
+            var newAuthor = sReq.body.author;
+            console.log('author:', newAuthor);
+
+            var newMood = sReq.body.mood;
+            console.log('mood:', newMood);
+
+            var newTime = sReq.body.time;
+            console.log('time:', newTime);
+
+            var newDate = sReq.body.date;
+            console.log('date:', newDate);
+
+            await createListing(client, {
+                title: newTitle,
+                author: newAuthor,
+                mood: newMood,
+                time: newTime,
+                date: newDate // YYYY-MM-DD
+            });
+
+            sRes.sendStatus(200);
+
+            //console.log(sReq); //Caution! It generates a lot of "spam" in the console !!!
+            //console.log(sRes); //Caution! It generates a lot of "spam" in the console !!!
+
+        });
+
 
     } catch (e) {
         console.error(e);
     } finally {
 
-        await client.close();
+        //await client.close();
     }
 }
 main().catch(console.error);
