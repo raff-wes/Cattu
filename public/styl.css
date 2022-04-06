@@ -1,109 +1,127 @@
-body{
-	margin: auto 0;
-	font-family : Arial Black;
-}
-#poraDnia{
-	display: flex;
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-.main{
-	display: flex;
-	position: relative;
-	float: left;
-	background-image: linear-gradient(135deg, #0af, #0ff);
-	margin:35px;
-	padding : 40px;
-	border-style: dashed;
-	border-color: #000;
-	border-width: 4px;
-	border-radius: 10px;
-	width: 25%;
-	height:800px;
-	transition: transform 0.5s;
-	box-shadow: 15px 15px 10px;
-}
-.content{
-	display: flex;
-	position: relative;
-	float: left;
-	margin:35px;
-	width: 38%;
-	height: 800px;
-	padding: 0;
-} 
-.info1{
-	writing-mode: vertical-rl;
-	display: flex;
-	position: relative;
-	top: 0;
-	right: 0;
-	padding: 35px;
-	background: #fff;
-	text-align: bottom;
-	border-style: dashed;
-	border-color: #000;
-	border-width: 4px;
-	border-radius: 10px;
-	width:15%;
-	height:800px;
-	font-size: 130%;
-	overflow: visible;
-	z-index: 1;
-	transform: scale(0.8) rotate(-7deg);
-	transition: transform 1s;
-	
-}
-.info1:hover{
-	transform: scale(0.85) rotate(-9deg);
-}
-.info2{
-	writing-mode: horizontal-tb;
-	display: block;
-	position: relative;
-	padding: 35px;
-	background-image: linear-gradient(135deg, #0af, #0ff);
-	left: -40px;
-	top: -840px;
-	float: right;
-	text-align: center;
-	border-style: dashed;
-	border-color: #000;
-	border-width: 4px;
-	border-radius: 10px;
-	width:15%;
-	height:800px;
-	box-shadow: 15px 15px 10px;
-	z-index: 2;
-	overflow: visible;
+body {
+    margin: auto 0;
+    font-family: Arial Black;
 }
 
-.submit{
-	background: #0ff;
-	border-radius: 10px;
-	transition: 0.5s;
-}
-input, select{
-	border-radius: 10px;
-}
-.submit:hover{
-	background: #00f4;
-}
-li{
-	float: left;
-}
-li a{
-	display: block;
-	padding: 8px;
-	background: #fff;
-}
-ul{
-	list-style-type: none;
-	margin: 0;
-	padding:0;
-	overflow: hidden;
+#poraDnia {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
+.main {
+    display: flex;
+    position: relative;
+    float: left;
+    background-image: linear-gradient(135deg, #0af, #0ff);
+    margin: 35px;
+    padding: 40px;
+    border-style: dashed;
+    border-color: #000;
+    border-width: 4px;
+    border-radius: 10px;
+    width: 25%;
+    height: 800px;
+    transition: transform 0.5s;
+    box-shadow: 15px 15px 10px;
+}
 
+.content {
+    display: flex;
+    position: relative;
+    float: left;
+    margin: 35px;
+    width: 38%;
+    height: 800px;
+    padding: 0;
+}
 
+.info1 {
+    writing-mode: vertical-rl;
+    display: flex;
+    position: relative;
+    top: 0;
+    right: 0;
+    padding: 35px;
+    background: #fff;
+    text-align: bottom;
+    border-style: dashed;
+    border-color: #000;
+    border-width: 4px;
+    border-radius: 10px;
+    width: 15%;
+    height: 800px;
+    font-size: 130%;
+    overflow: visible;
+    z-index: 1;
+    transform: scale(0.8) rotate(-7deg);
+    transition: transform 1s;
+}
+
+.info1:hover {
+    transform: scale(0.85) rotate(-9deg);
+}
+
+.info2 {
+    writing-mode: horizontal-tb;
+    display: block;
+    position: relative;
+    padding: 35px;
+    background-image: linear-gradient(135deg, #0af, #0ff);
+    left: -40px;
+    top: -840px;
+    float: right;
+    text-align: center;
+    border-style: dashed;
+    border-color: #000;
+    border-width: 4px;
+    border-radius: 10px;
+    width: 15%;
+    height: 800px;
+    box-shadow: 15px 15px 10px;
+    z-index: 2;
+    overflow: visible;
+}
+
+.submit {
+    background: #0ff;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+input,
+select {
+    border-radius: 10px;
+}
+
+.submit:hover {
+    background: #00f4;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 8px;
+    background: #fff;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.wynik {
+    border: 1px solid black;
+    border-radius: 10px;
+    line-height: 60%;
+}
+
+#header {
+    margin-bottom: 10px;
+}

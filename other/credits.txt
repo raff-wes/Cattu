@@ -1,0 +1,14 @@
+--------------------------------------------------------------
+_________
+|Authors|
+---------
+Kowalewski Kacper - Data Structure, Database
+Wesołowski Rafał - Project Leader, Node.js
+Zieliński Maciej - Frontend, HTML, CSS
+--------------------------------------------------------------
+_____________
+|Consultants|
+-------------
+Prajsnar Ewa - Teacher, tutor
+Wołek Michał - A very wise and helpful Internet user
+--------------------------------------------------------------

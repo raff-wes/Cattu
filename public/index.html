@@ -21,12 +21,13 @@
 
             <div class="main">
 
-                <form method="POST" action="/added">
+                <form>
 
                     Podaj tytuł piosenki<br>
                     <input type="text" id="tytul" name="title" size="20px" required><br><br> Podaj wykonawcę<br>
-                    <input type="text" id="wykonawca" name="author" size="20px" required><br><br> W jakim Jesteś nastroju?
+                    <input type="text" id="wykonawca" name="author" size="20px" required><br><br>Nazwa użytkownika
                     <br>
+                    <input type="text" id="uzytkownik" name="user" size="20px" required value="Guest"><br><br> W jakim Jesteś nastroju?<br>
                     <input type="checkbox" id="wesoly" value="wesoly" name="mood">
                     <label for="wesoly"> Wesoły/a </label><br>
 
@@ -60,7 +61,9 @@
                     </select><br><br>
 
                     <label for="pora"> Podaj datę </label><br>
-                    <input name="date" type="date"><br><br>
+                    <input name="date" type="date" id="date">
+                    <button onclick="todayFunction()" type="button" class="submit" id="today">Dzisiaj</button>
+                    <br><br>
 
 
                     <button type="submit" class="submit">Skończone!</button>
@@ -124,17 +127,128 @@
                 <a href=""><br><br><br><br><br><br><br><br><br>Zobacz pełną historię</a>
             </div>
             <div class="info2">
-
-                <!-- Tutaj chcemy pobierać dane z bazy żeby móc je wyświetlić (pobierać może zewnętrzny skrypt) -->
-                *Dane pobrane z bazy*
-
+                <div id="header">
+                    Sprawdź wyniki dla:
+                    <input type="text" id="wypis" name="sprawdz" size="20px" required>
+                    <button type="button" id="wez" class="submit">Sprawdź</button>
+                </div>
+                <div id="sprawdz">
+                    <!-- Tutaj chcemy pobierać dane z bazy żeby móc je wyświetlić (pobierać może zewnętrzny skrypt) -->
+                    *Dane pobrane z bazy*
+                </div>
             </div>
-
         </div>
-    </div>
 
-    <script src="script1.js"></script>
+        <script src="script1.js"></script>
+        <script>
+            // const form = document.querySelector(".main > form")
+            // form.onsubmit
+            // const funkcjaSpecjalna = function(e) {
+            //     e.preventDefault();
 
+            //     const title = document.getElementsByName("title").value;
+            //     const author = document.getElementsByName("author").value;
+            //     const user = document.getElementsByName("user").value;
+            //     const mood = document.getElementsByName("mood").value;
+            //     const time = document.getElementsByName("time").value;
+            //     const date = document.getElementsByName("date").value;
+            // }
+            const jakasfunkcja = function(e) {
+                e.preventDefault();
+
+                const title = document.getElementsByName("title")[0].value;
+                const author = document.getElementsByName("author")[0].value;
+                const user = document.getElementsByName("user")[0].value;
+                const mood = document.getElementsByName("mood")[0].value;
+                const time = document.getElementsByName("time")[0].value;
+                const date = document.getElementsByName("date")[0].value;
+
+                console.log(title);
+                console.log(author);
+                console.log(user);
+                console.log(mood);
+                console.log(time);
+                console.log(date);
+                fetch("http://localhost:8080/added", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        title: title,
+                        author: author,
+                        user: user,
+                        mood: mood,
+                        date: date,
+                        time: time
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).catch(err => console.log(err.message));
+            }
+
+            const form = document.querySelector(".main > form")
+            form.addEventListener("submit", jakasfunkcja)
+            document.getElementById("wez").addEventListener("click", funkcjaDaj)
+
+            function todayFunction() {
+                let dzis = new Date();
+                //console.log(dzis);
+                //document.getElementById("today").style.color = "red";
+                let wynik = "";
+                //console.log(wynik);
+                wynik += dzis.getFullYear();
+
+
+
+                wynik += "-";
+                if (dzis.getMonth() + 1 < 10) {
+                    wynik += "0";
+                }
+                wynik += (dzis.getMonth() + 1);
+                wynik += "-";
+
+                if (dzis.getDate() < 10) {
+                    wynik += "0";
+                }
+                wynik += dzis.getDate();
+
+                //console.log(wynik);
+                document.getElementById("date").value = wynik;
+            }
+
+            function funkcjaDaj() {
+                fetch("http://localhost:8080/sprawdz", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(resp => resp.json()).then(json => {
+                    console.log(json)
+                    let sprawdz = document.getElementById("sprawdz");
+                    sprawdz.innerHTML = "";
+                    json.forEach(element => {
+                        console.log(element);
+                        let div = document.createElement("div");
+                        div.classList.add("wynik");
+                        let title = document.createElement("p");
+                        title.textContent = element.title;
+                        let author = document.createElement("p");
+                        author.textContent = element.author;
+                        let mood = document.createElement("p");
+                        mood.textContent = element.mood;
+                        let time = document.createElement("p");
+                        time.textContent = element.time;
+                        let date = document.createElement("p");
+                        date.textContent = element.date;
+                        div.appendChild(title);
+                        div.appendChild(author);
+                        div.appendChild(mood);
+                        div.appendChild(time);
+                        div.appendChild(date);
+                        sprawdz.appendChild(div);
+                    });
+                }).catch(err => console.log(err.message));
+            }
+        </script>
 </body>
 
 </html>
