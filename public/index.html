@@ -163,6 +163,19 @@
                 const time = document.getElementsByName("time")[0].value;
                 const date = document.getElementsByName("date")[0].value;
 
+                const moods = document.getElementsByName("mood");
+                console.log(moods);
+                console.log(Array.from(moods).filter((check) => {
+                    return check.checked;
+                }).map((check) => {
+                    return check.value;
+                }).join(","));
+                const moodsString = Array.from(moods).filter((check) => {
+                    return check.checked;
+                }).map((check) => {
+                    return check.value;
+                }).join(",");
+
                 console.log(title);
                 console.log(author);
                 console.log(user);
@@ -175,7 +188,7 @@
                         title: title,
                         author: author,
                         user: user,
-                        mood: mood,
+                        mood: moodsString,
                         date: date,
                         time: time
                     }),
@@ -216,7 +229,8 @@
             }
 
             function funkcjaDaj() {
-                fetch("http://localhost:8080/sprawdz", {
+                const input = document.getElementById("wypis").value;
+                fetch("http://localhost:8080/sprawdz/" + input, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -234,6 +248,8 @@
                         let author = document.createElement("p");
                         author.textContent = element.author;
                         let mood = document.createElement("p");
+                        console.log(element.mood);
+                        let nastroje
                         mood.textContent = element.mood;
                         let time = document.createElement("p");
                         time.textContent = element.time;

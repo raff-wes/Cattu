@@ -87,9 +87,9 @@ async function main() {
 
         });
 
-        app.get('/sprawdz', async function(sReq, sRes) {
+        app.get('/sprawdz/:userId', async function(sReq, sRes) {
             const wynik = await findListingWithUserId(client, {
-                userId: "Guest",
+                userId: sReq.params.userId,
                 maximumNumberOfResults: 5
             });
             sRes.json(wynik);
@@ -121,14 +121,14 @@ async function findListingWithUserId(client, {
     maximumNumberOfResults = Number.MAX_SAFE_INTEGER
 }) {
     const cursor = client.db("cattu").collection("test1").find({
-            userId: { $gte: userId }
+            userId: { $eq: userId }
         }).sort({ date: -1 })
         .limit(maximumNumberOfResults);
 
     const results = await cursor.toArray();
 
     if (results.length > 0) {
-        console.log(`Found listing(s): ` + userId);
+        console.log(`Found listing(s) for: ` + userId);
         results.forEach((results, i) => {
 
             console.log(' ');
@@ -143,7 +143,7 @@ async function findListingWithUserId(client, {
         });
         //console.log(results);
     } else {
-        console.log(`No listings found with ${results.userId}`);
+        console.log(`No listing(s) found for: ` + userId);
     }
     return results;
 }
