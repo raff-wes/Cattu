@@ -132,9 +132,11 @@
                     <input type="text" id="wypis" name="sprawdz" size="20px" required>
                     <button type="button" id="wez" class="submit">Sprawdź</button>
                 </div>
-                <div id="sprawdz">
-                    <!-- Tutaj chcemy pobierać dane z bazy żeby móc je wyświetlić (pobierać może zewnętrzny skrypt) -->
-                    *Dane pobrane z bazy*
+                <div id="zipper">
+                    <div id="sprawdz">
+                        <!-- Tutaj chcemy pobierać dane z bazy żeby móc je wyświetlić (pobierać może zewnętrzny skrypt) -->
+                        *Dane pobrane z bazy*
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,19 +247,39 @@
                         div.classList.add("wynik");
                         let title = document.createElement("p");
                         title.textContent = element.title;
+                        div.appendChild(title);
                         let author = document.createElement("p");
                         author.textContent = element.author;
-                        let mood = document.createElement("p");
-                        console.log(element.mood);
-                        let nastroje
-                        mood.textContent = element.mood;
+                        div.appendChild(author);
+
+                        let nastroje = element.mood;
+                        console.log(nastroje);
+                        let nastrojeArray = nastroje.split(",");
+                        console.log(nastrojeArray);
+                        console.log(nastrojeArray.length);
+                        if (nastrojeArray.length < 2) {
+                            console.log("Tylko jeden nastrój");
+                            let mood = document.createElement("p");
+                            mood.textContent = element.mood;
+                            div.appendChild(mood);
+                        } else {
+                            console.log("Więcej nastrojów");
+                            let mood = document.createElement("div");
+                            div.appendChild(mood);
+                            mood.classList.add("wynik2");
+                            nastrojeArray.forEach((el) => {
+                                console.log(el);
+                                let singleMood = document.createElement("p");
+                                singleMood.textContent = el;
+                                mood.appendChild(singleMood);
+                            })
+                        }
+
+
                         let time = document.createElement("p");
                         time.textContent = element.time;
                         let date = document.createElement("p");
                         date.textContent = element.date;
-                        div.appendChild(title);
-                        div.appendChild(author);
-                        div.appendChild(mood);
                         div.appendChild(time);
                         div.appendChild(date);
                         sprawdz.appendChild(div);
