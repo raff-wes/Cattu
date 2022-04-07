@@ -1,13 +1,13 @@
-var express = require('express');
-var http = require('http');
-var path = require("path");
-var helmet = require('helmet');
-var rateLimit = require("express-rate-limit");
+let express = require('express');
+let http = require('http');
+let path = require("path");
+let helmet = require('helmet');
+let rateLimit = require("express-rate-limit");
 const port = process.env.PORT || 8080;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const { body, validationResult } = require('express-validator');
 const { title } = require('process');
-var cors = require('cors');
+let cors = require('cors');
 const res = require('express/lib/response');
 
 const app = express(),
@@ -46,29 +46,28 @@ async function main() {
 
         await client.connect(); // Connect to the MongoDB cluster
 
-
         app.post('/added', async function(sReq, sRes) {
 
             //console.log(sReq);
-            console.log("TUTAJ!!!");
-            console.log(sReq.body);
+            //console.log("TUTAJ!!!");
+            //console.log(sReq.body);
             //const body = (sReq.body);
-            var newTitle = sReq.body.title;
+            let newTitle = sReq.body.title;
             console.log('title:', newTitle);
 
-            var newAuthor = sReq.body.author;
+            let newAuthor = sReq.body.author;
             console.log('author:', newAuthor);
 
-            var newUser = sReq.body.user;
+            let newUser = sReq.body.user;
             console.log('user:', newUser);
 
-            var newMood = sReq.body.mood;
+            let newMood = sReq.body.mood;
             console.log('mood:', newMood);
 
-            var newTime = sReq.body.time;
+            let newTime = sReq.body.time;
             console.log('time:', newTime);
 
-            var newDate = sReq.body.date;
+            let newDate = sReq.body.date;
             console.log('date:', newDate);
 
             await createListing(client, {
@@ -95,14 +94,6 @@ async function main() {
             sRes.json(wynik);
         });
 
-
-
-        /*app.post('/added
-        ', async function(sReq, sRes) {
-        sRes.json();
-        });*/
-
-
     } catch (e) {
         console.error(e);
     } finally {
@@ -112,7 +103,7 @@ async function main() {
 main().catch(console.error);
 async function createListing(client, newListing) {
 
-    const result = await client.db("cattu").collection("test1").insertOne(newListing);
+    const result = await client.db("cattu").collection("beta").insertOne(newListing);
     console.log(`New listing created with the following id: ${result.insertedId}`);
 }
 
@@ -120,7 +111,7 @@ async function findListingWithUserId(client, {
     userId = "Guest",
     maximumNumberOfResults = Number.MAX_SAFE_INTEGER
 }) {
-    const cursor = client.db("cattu").collection("test1").find({
+    const cursor = client.db("cattu").collection("beta").find({
             userId: { $eq: userId }
         }).sort({ date: -1 })
         .limit(maximumNumberOfResults);

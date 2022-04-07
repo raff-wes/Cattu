@@ -2,8 +2,8 @@
 _________
 |Authors|
 ---------
-Kowalewski Kacper - Data Structure, Database
-Wesołowski Rafał - Project Leader, Node.js
+Kowalewski Kacper - Database, CSS, HTML
+Wesołowski Rafał - Project Leader, Data structure, Node.js
 Zieliński Maciej - Frontend, HTML, CSS
 --------------------------------------------------------------
 _____________

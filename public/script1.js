@@ -4,7 +4,7 @@ let time = d.getHours();
 if (time < 8) {
     bg = 1;
 } else if (time < 16) {
-    bg = 2;
+    bg = 3;
 } else {
     bg = 3;
 }
@@ -383,7 +383,7 @@ function casethree() {
     document.getElementById("tloGwiazdy2").style.alignItems = "center";
     document.getElementById("tloGwiazdy2").style.overflow = "visible";
     document.getElementById("tloGwiazdy2").style.zIndex = "1";
-    document.getElementById("tloGwiazdy2").style.left = "-520px";
+    document.getElementById("tloGwiazdy2").style.left = "-52px";
     document.getElementById("tloGwiazdy2").style.top = "250px";
     document.getElementById("tloGwiazdy2").style.pointerEvents = "none";
     document.getElementById("tloGwiazdy2").style.transition = "1s";

@@ -9,20 +9,21 @@
 </head>
 
 <body>
-
+    <div id="header">
+        <h1 id="home">Cattu</h1>
+        <h3>Catchy Tunes</h3>
+    </div>
     <ul>
-        <li><a href="#home">Start</a></li>
-        <li><a href="#form">Formularz</a></li>
+        <li><a id="dom" href="#home">Start</a></li>
+        <li><a id="zapis" href="#form">Formularz</a></li>
     </ul>
 
     <div id="poraDnia">
         <div id="bgchange">
 
-
             <div class="main">
 
-                <form>
-
+                <form id="form">
                     Podaj tytuł piosenki<br>
                     <input type="text" id="tytul" name="title" size="20px" required><br><br> Podaj wykonawcę<br>
                     <input type="text" id="wykonawca" name="author" size="20px" required><br><br>Nazwa użytkownika
@@ -49,6 +50,15 @@
                     <input type="checkbox" id="neutralny" value="neutralny" name="mood">
                     <label for="neutralny"> Neutralny/a </label><br>
 
+                    <input type="checkbox" id="spokojny" value="spokojny" name="mood">
+                    <label for="spokojny"> Spokojny/a </label><br>
+
+                    <input type="checkbox" id="zachwycony" value="zachwycony" name="mood">
+                    <label for="zachwycony"> Zachwycony/a </label><br>
+
+                    <input type="checkbox" id="zadumany" value="zadumany" name="mood">
+                    <label for="zadumany"> Zadumany/a </label><br>
+
                     <br>
 
                     <label for="pora"> Podaj porę dnia </label><br>
@@ -65,9 +75,8 @@
                     <button onclick="todayFunction()" type="button" class="submit" id="today">Dzisiaj</button>
                     <br><br>
 
-
-                    <button type="submit" class="submit">Skończone!</button>
-                    <button type="reset" class="submit">Resetuj!</button>
+                    <button type="reset" id="reset" class="submit">Resetuj!</button>
+                    <button type="submit" id="done" class="submit">Skończone!</button>
 
                 </form>
 
@@ -90,7 +99,6 @@
                     <div id="gwiazda12"></div>
                     <div id="gwiazda13"></div>
                 </div>
-
 
                 <div id="tlo2">
                     <div id="obiekt_glowny2" onmouseover="bigSun(this)" onmouseout="smolSun(this)">
@@ -124,7 +132,7 @@
 
             <div class="info1">
 
-                <a href=""><br><br><br><br><br><br><br><br><br>Zobacz pełną historię</a>
+                <a href=""><br><br><br><br><br>Zobacz pełną historię</a>
             </div>
             <div class="info2">
                 <div id="header">
@@ -134,7 +142,6 @@
                 </div>
                 <div id="zipper">
                     <div id="sprawdz">
-                        <!-- Tutaj chcemy pobierać dane z bazy żeby móc je wyświetlić (pobierać może zewnętrzny skrypt) -->
                         *Dane pobrane z bazy*
                     </div>
                 </div>
@@ -142,151 +149,7 @@
         </div>
 
         <script src="script1.js"></script>
-        <script>
-            // const form = document.querySelector(".main > form")
-            // form.onsubmit
-            // const funkcjaSpecjalna = function(e) {
-            //     e.preventDefault();
-
-            //     const title = document.getElementsByName("title").value;
-            //     const author = document.getElementsByName("author").value;
-            //     const user = document.getElementsByName("user").value;
-            //     const mood = document.getElementsByName("mood").value;
-            //     const time = document.getElementsByName("time").value;
-            //     const date = document.getElementsByName("date").value;
-            // }
-            const jakasfunkcja = function(e) {
-                e.preventDefault();
-
-                const title = document.getElementsByName("title")[0].value;
-                const author = document.getElementsByName("author")[0].value;
-                const user = document.getElementsByName("user")[0].value;
-                const mood = document.getElementsByName("mood")[0].value;
-                const time = document.getElementsByName("time")[0].value;
-                const date = document.getElementsByName("date")[0].value;
-
-                const moods = document.getElementsByName("mood");
-                console.log(moods);
-                console.log(Array.from(moods).filter((check) => {
-                    return check.checked;
-                }).map((check) => {
-                    return check.value;
-                }).join(","));
-                const moodsString = Array.from(moods).filter((check) => {
-                    return check.checked;
-                }).map((check) => {
-                    return check.value;
-                }).join(",");
-
-                console.log(title);
-                console.log(author);
-                console.log(user);
-                console.log(mood);
-                console.log(time);
-                console.log(date);
-                fetch("http://localhost:8080/added", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        title: title,
-                        author: author,
-                        user: user,
-                        mood: moodsString,
-                        date: date,
-                        time: time
-                    }),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).catch(err => console.log(err.message));
-            }
-
-            const form = document.querySelector(".main > form")
-            form.addEventListener("submit", jakasfunkcja)
-            document.getElementById("wez").addEventListener("click", funkcjaDaj)
-
-            function todayFunction() {
-                let dzis = new Date();
-                //console.log(dzis);
-                //document.getElementById("today").style.color = "red";
-                let wynik = "";
-                //console.log(wynik);
-                wynik += dzis.getFullYear();
-
-
-
-                wynik += "-";
-                if (dzis.getMonth() + 1 < 10) {
-                    wynik += "0";
-                }
-                wynik += (dzis.getMonth() + 1);
-                wynik += "-";
-
-                if (dzis.getDate() < 10) {
-                    wynik += "0";
-                }
-                wynik += dzis.getDate();
-
-                //console.log(wynik);
-                document.getElementById("date").value = wynik;
-            }
-
-            function funkcjaDaj() {
-                const input = document.getElementById("wypis").value;
-                fetch("http://localhost:8080/sprawdz/" + input, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(resp => resp.json()).then(json => {
-                    console.log(json)
-                    let sprawdz = document.getElementById("sprawdz");
-                    sprawdz.innerHTML = "";
-                    json.forEach(element => {
-                        console.log(element);
-                        let div = document.createElement("div");
-                        div.classList.add("wynik");
-                        let title = document.createElement("p");
-                        title.textContent = element.title;
-                        div.appendChild(title);
-                        let author = document.createElement("p");
-                        author.textContent = element.author;
-                        div.appendChild(author);
-
-                        let nastroje = element.mood;
-                        console.log(nastroje);
-                        let nastrojeArray = nastroje.split(",");
-                        console.log(nastrojeArray);
-                        console.log(nastrojeArray.length);
-                        if (nastrojeArray.length < 2) {
-                            console.log("Tylko jeden nastrój");
-                            let mood = document.createElement("p");
-                            mood.textContent = element.mood;
-                            div.appendChild(mood);
-                        } else {
-                            console.log("Więcej nastrojów");
-                            let mood = document.createElement("div");
-                            div.appendChild(mood);
-                            mood.classList.add("wynik2");
-                            nastrojeArray.forEach((el) => {
-                                console.log(el);
-                                let singleMood = document.createElement("p");
-                                singleMood.textContent = el;
-                                mood.appendChild(singleMood);
-                            })
-                        }
-
-
-                        let time = document.createElement("p");
-                        time.textContent = element.time;
-                        let date = document.createElement("p");
-                        date.textContent = element.date;
-                        div.appendChild(time);
-                        div.appendChild(date);
-                        sprawdz.appendChild(div);
-                    });
-                }).catch(err => console.log(err.message));
-            }
-        </script>
+        <script src="script2.js"></script>
 </body>
 
 </html>
