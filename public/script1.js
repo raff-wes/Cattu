@@ -4,7 +4,7 @@ let time = d.getHours();
 if (time < 8) {
     bg = 1;
 } else if (time < 16) {
-    bg = 3;
+    bg = 2;
 } else {
     bg = 3;
 }
